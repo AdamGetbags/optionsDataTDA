@@ -9,16 +9,16 @@ from tda import auth, client
 import json
 import pandas as pd
 from datetime import datetime, date
-import TDAsecrets
+import secretsTDA
 
 try:
-    c = auth.client_from_token_file(TDAsecrets.token_path, TDAsecrets.api_key)
+    c = auth.client_from_token_file(secretsTDA.token_path, secretsTDA.api_key)
 except FileNotFoundError:
     from selenium import webdriver
     with webdriver.Chrome() as driver:
         c = auth.client_from_login_flow(
-            driver, TDAsecrets.api_key, TDAsecrets.redirect_uri,
-            TDAsecrets.token_path)
+            driver, secretsTDA.api_key, secretsTDA.redirect_uri,
+            secretsTDA.token_path)
 
 #get call options
 # r = c.get_option_chain(symbol = 'XOM',
